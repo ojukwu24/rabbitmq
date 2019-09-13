@@ -1,0 +1,54 @@
+version: "3.6"
+services:
+  rabbitmq-01:
+    image: couretech/rabbitmq:3-management
+    hostname: rabbitmq-01
+    environment:
+      - RABBITMQ_DEFAULT_USER=coure
+      - RABBITMQ_DEFAULT_PASS=Coure@5050
+      - RABBITMQ_ERLANG_COOKIE="D5DB52E5CEA591B189BDFD1C2B994"
+    networks:
+      - prod
+    volumes:
+      - rabbitmq-01-data:/var/lib/rabbitmq
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.labels.rabbitmq1 == true]
+  rabbitmq-02:
+    image: couretech/rabbitmq:3-management
+    hostname: rabbitmq-02
+    environment:
+      - RABBITMQ_DEFAULT_USER=coure
+      - RABBITMQ_DEFAULT_PASS=Coure@5050
+      - RABBITMQ_ERLANG_COOKIE="D5DB52E5CEA591B189BDFD1C2B994"
+    networks:
+      - prod
+    volumes:
+      - rabbitmq-02-data:/var/lib/rabbitmq
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.labels.rabbitmq2 == true]
+  rabbitmq-03:
+    image: couretech/rabbitmq:3-management
+    hostname: rabbitmq-03
+    environment:
+      - RABBITMQ_DEFAULT_USER=coure
+      - RABBITMQ_DEFAULT_PASS=Coure@5050
+      - RABBITMQ_ERLANG_COOKIE="D5DB52E5CEA591B189BDFD1C2B994"
+    networks:
+      - prod
+    volumes:
+      - rabbitmq-03-data:/var/lib/rabbitmq
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.labels.rabbitmq3 == true]
+networks:
+  prod:
+    external: true
+volumes:
+  rabbitmq-01-data:
+  rabbitmq-02-data:
+  rabbitmq-03-data:
